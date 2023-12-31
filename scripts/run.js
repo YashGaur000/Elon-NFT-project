@@ -36,20 +36,43 @@
 
 
 
-//                ELON'S CODE HERE
+//                ELON'S CODE HERE FOR DEPLOYMENT ONLY
 
 
-const hre=require("hardhat")
+// const hre=require("hardhat")
 
-async function main(){
-console.log("Deploying Contract...");
-const elon=await hre.ethers.deployContract("ElonNFT")
-console.log("Contract Deployed to address",elon.target);
+// async function main(){
+// console.log("Deploying Contract...");
+// const elon=await hre.ethers.deployContract("ElonNFT")
+// console.log("Contract Deployed to address",elon.target);
+// }
+
+// main()
+//   .then(() =>process.exit(0))
+//   .catch((error) => {
+//   console.log("Error: " + error)
+//   process.exit(1);
+// });
+
+
+
+//            NOW MINTING THE ELON'S NFT WITH DEPLOYMENT
+
+const {ethers}= require("hardhat");
+
+async function main() {
+const deployNFTContract = await ethers.deployContract("ElonNFT");
+const elon = await deployNFTContract.waitForDeployment();
+console.log("NFT address is",await elon.getAddress());
+
+console.log("Minting NFT...");
+let txn = await elon.mintNFT();
+await txn.wait();
+console.log("Yay... Your NFT is minted successfully");
 }
-
 main()
-  .then(() =>process.exit(0))
-  .catch((error) => {
-  console.log("Error: " + error)
+  .then(()=>process.exit(0))
+  .catch((error)=>{
+  console.log("Error: " + error);
   process.exit(1);
-});
+  })
