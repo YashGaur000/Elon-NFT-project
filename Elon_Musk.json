@@ -1,0 +1,17 @@
+{
+    "name": "Elon Musk",
+    "description": "Yo I have created a new Elon Musk NFT",
+    "image":"https://tomato-vivacious-gecko-588.mypinata.cloud/ipfs/QmUk4ECxq4vhjC7qEJVxn6NUNymL14BPBvfcsJ8J2db4JG?_gl=1*15tw8dq*_ga*MzI5MDcwMTUyLjE3MDQwMTU3ODA.*_ga_5RMPXG14TE*MTcwNDAxNTc4MC4xLjEuMTcwNDAxODA1My40MC4wLjA.",
+
+    "attributes": 
+    [
+        {
+			"trait_type":"Zodiac","value":"Cancer"
+		},
+		{
+			"trait_type":"Height","value":"6'1"
+		},
+		{	"trait_type":"Personality Type","value":"INTJ"
+		}
+    ]
+}

@@ -58,21 +58,46 @@
 
 //            NOW MINTING THE ELON'S NFT WITH DEPLOYMENT
 
-const {ethers}= require("hardhat");
+// const {ethers}= require("hardhat");
 
-async function main() {
-const deployNFTContract = await ethers.deployContract("ElonNFT");
-const elon = await deployNFTContract.waitForDeployment();
-console.log("NFT address is",await elon.getAddress());
+// async function main() {
+// const deployNFTContract = await ethers.deployContract("ElonNFT");
+// const elon = await deployNFTContract.waitForDeployment();
+// console.log("NFT address is",await elon.getAddress());
 
-console.log("Minting NFT...");
-let txn = await elon.mintNFT();
-await txn.wait();
-console.log("Yay... Your NFT is minted successfully");
+// console.log("Minting NFT...");
+// let txn = await elon.mintNFT();
+// await txn.wait();
+// console.log("Yay... Your NFT is minted successfully");
+// }
+// main()
+//   .then(()=>process.exit(0))
+//   .catch((error)=>{
+//   console.log("Error: " + error);
+//   process.exit(1);
+//   })
+
+
+
+//                          FINALLY NFT is getting deployed on mumbai testnet of polygon
+
+const {ethers} = require("hardhat");
+
+async function main(){
+  const ElonNFT = await ethers.getContractFactory("ElonNFT");
+  const elon = await ElonNFT.deploy();
+  console.log("Deploying Contract...");
+  const txnhash = elon.deploymentTransaction.hash;
+  const txnReceipt = await ethers.provider.getSigner
+  console.log("Deployed contract address is: ",txnReceipt.contractAddress);
+  console.log("Minting NFT...");
+  let txn = await elon.mintNFT();
+  await txn.wait();
 }
+
 main()
-  .then(()=>process.exit(0))
-  .catch((error)=>{
-  console.log("Error: " + error);
-  process.exit(1);
-  })
+.then(() => process.exit(0))
+.catch((error) =>{ 
+console.error(error);
+process.exit(1);
+});
